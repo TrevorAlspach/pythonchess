@@ -66,6 +66,8 @@ def draw_pieces(screen, board):
             piece = board[r][c]
             if piece != '--':
                 screen.blit(IMAGES[piece],pg.Rect(c*SQ_SIZE, r*SQ_SIZE,SQ_SIZE,SQ_SIZE))
+            else:
+                pass
 
 
 if __name__ == "__main__":
