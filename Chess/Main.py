@@ -88,7 +88,7 @@ def draw_board(screen):
 def draw_pieces(screen, board):
     for r in range(DIMENSION):
         for c in range(DIMENSION):
-            piece = board[r][c]
+            piece = board[r][c].id
             if piece != '--':
                 screen.blit(IMAGES[piece], pg.Rect(c * SQ_SIZE, r * SQ_SIZE, SQ_SIZE, SQ_SIZE))
 

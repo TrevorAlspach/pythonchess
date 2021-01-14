@@ -8,44 +8,47 @@ class Piece:
         self.color = color
         self.type = type
         self.can_take = can_take
-
-
+        self.id = color+type
 
 class GameState:
     def __init__(self):
-        # board is an 8x8 2d list, with each element containing two characters
-        # First character represents color of piece, 'b' or 'w'
-        # Second character represents the type of piece, 'K', 'Q','R','B','N', and 'P'
-        # "--" represents an empty space
         self.board = [
-            ["bR", "bN", "bB", "bQ", "bK", "bB", "bN", "bR"],
-            ["bP", "bP", "bP", "bP", "bP", "bP", "bP", "bP"],
-            ["--", "--", "--", "--", "--", "--", "--", "--"],
-            ["--", "--", "--", "--", "--", "--", "--", "--"],
-            ["--", "--", "--", "--", "--", "--", "--", "--"],
-            ["--", "--", "--", "--", "--", "--", "--", "--"],
-            ["wP", "wP", "wP", "wP", "wP", "wP", "wP", "wP"],
-            ["wR", "wN", "wB", "wQ", "wK", "wB", "wN", "wR"]]
+            [Piece("b", "R"), Piece("b", "N"), Piece("b", "B"),
+             Piece("b", "Q"), Piece("b", "K"), Piece("b", "B"), Piece("b", "N"), Piece("b", "R")],
+            [Piece("b", "P"), Piece("b", "P"), Piece("b", "P"),
+             Piece("b", "P"), Piece("b", "P"), Piece("b", "P"), Piece("b", "P"), Piece("b", "P")],
+            [Piece("-", "-"), Piece("-", "-"), Piece("-", "-"),
+             Piece("-", "-"), Piece("-", "-"), Piece("-", "-"), Piece("-", "-"), Piece("-", "-")],
+            [Piece("-", "-"), Piece("-", "-"), Piece("-", "-"),
+             Piece("-", "-"), Piece("-", "-"), Piece("-", "-"), Piece("-", "-"), Piece("-", "-")],
+            [Piece("-", "-"), Piece("-", "-"), Piece("-", "-"),
+             Piece("-", "-"), Piece("-", "-"), Piece("-", "-"), Piece("-", "-"), Piece("-", "-")],
+            [Piece("-", "-"), Piece("-", "-"), Piece("-", "-"),
+             Piece("-", "-"), Piece("-", "-"), Piece("-", "-"), Piece("-", "-"), Piece("-", "-")],
+            [Piece("w", "P"), Piece("w", "P"), Piece("w", "P"),
+             Piece("w", "P"), Piece("w", "P"), Piece("w", "P"), Piece("w", "P"), Piece("w", "P")],
+            [Piece("w", "R"), Piece("w", "N"), Piece("w", "B"),
+             Piece("w", "Q"), Piece("w", "K"), Piece("w", "B"), Piece("w", "N"), Piece("w", "R")]]
 
         self.whiteToMove = True
         self.moveLog = []
 
     def makeMove(self, move):
-        self.board[move.start_row][move.start_col] = "--"
+        self.board[move.start_row][move.start_col] = Piece("-", "-")
         self.board[move.end_row][move.end_col] = move.piece_moved
         self.moveLog.append(move)
         self.whiteToMove = not self.whiteToMove
 
     def is_valid_move(self, move):
         if self.whiteToMove:
-            if self.board[move.start_row][move.start_col] in ("bP","bR","bN","bB","bQ","bK"):
+            if self.board[move.start_row][move.start_col].id in ("bP","bR","bN","bB","bQ","bK"):
                 return False
-            if self.board[move.end_row][move.end_col] in ("wP","wR","wN","wB","wQ","wK"):
+            if self.board[move.end_row][move.end_col].id in ("wP","wR","wN","wB","wQ","wK"):
                 return False
         else:
-            if self.board[move.start_row][move.start_col] in ("wP","wR","wN","wB","wQ","wK"):
+            if self.board[move.start_row][move.start_col].id in ("wP","wR","wN","wB","wQ","wK"):
                 return False
-            if self.board[move.end_row][move.end_col] in ("bP","bR","bN","bB","bQ","bK"):
+            if self.board[move.end_row][move.end_col].id in ("bP","bR","bN","bB","bQ","bK"):
                 return False
         return True
 
