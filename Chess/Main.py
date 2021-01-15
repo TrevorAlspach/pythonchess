@@ -53,6 +53,7 @@ def main():
                 else:
                     sq_selected = (row, col)
                     player_clicks.append(sq_selected)
+                #Resets the click if it is on an empty space
                 if len(player_clicks) == 1 and game_state.board[sq_selected[0]][sq_selected[1]].id == '--':
                     sq_selected = ()
                     player_clicks = []
