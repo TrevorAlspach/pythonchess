@@ -46,14 +46,18 @@ def main():
                 col = location[0] // SQ_SIZE
                 row = location[1] // SQ_SIZE
 
-                if sq_selected == (row, col):  # user selected the same square twice
+                if sq_selected == (row, col):   # user selected the same square twice
                     sq_selected = ()
                     player_clicks = []
+
                 else:
                     sq_selected = (row, col)
                     player_clicks.append(sq_selected)
+                if len(player_clicks) == 1 and game_state.board[sq_selected[0]][sq_selected[1]].id == '--':
+                    sq_selected = ()
+                    player_clicks = []
 
-                if len(player_clicks) == 2:
+                elif len(player_clicks) == 2:
                     move = Engine.Move(player_clicks[0], player_clicks[1], game_state.board)
                     if game_state.is_valid_move(move):
                         print(move.get_chess_notation())
